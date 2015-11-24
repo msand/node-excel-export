@@ -1,7 +1,7 @@
 
 'use strict';
 
-const excel = require('./lib/excel');
+var excel = require('./lib/excel');
 module.exports = {
   buildExport: function(params) {
     if( ! (params instanceof Array)) throw 'buildExport expects an array';
