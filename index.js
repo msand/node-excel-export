@@ -6,13 +6,13 @@ module.exports = {
   buildExport: function(params) {
     if( ! (params instanceof Array)) throw 'buildExport expects an array';
 
-    let sheets = [];
+    var sheets = [];
     params.forEach(function(sheet, index) {
-      let specification = sheet.specification;
-      let dataset = sheet.data;
-      let sheet_name = sheet.name || 'Sheet' + index+1;
-      let data = [];
-      let config = {
+      var specification = sheet.specification;
+      var dataset = sheet.data;
+      var sheet_name = sheet.name || 'Sheet' + index+1;
+      var data = [];
+      var config = {
         cols: []
       };
 
@@ -25,8 +25,8 @@ module.exports = {
       }
 
       //build the header row
-      let header = [];
-      for (let col in specification) {
+      var header = [];
+      for (var col in specification) {
         header.push({
           value: specification[col].displayName,
           style: (specification[col].headerStyle) ? specification[col].headerStyle : undefined
@@ -43,10 +43,10 @@ module.exports = {
       }
       data.push(header); //Inject the header at 0
 
-      dataset.forEach(record => {
-        let row = [];
-        for (let col in specification) {
-          let cell_value = record[col];
+      dataset.forEach(function(record) {
+        var row = [];
+        for (var col in specification) {
+          var cell_value = record[col];
 
           if(specification[col].cellFormat && typeof specification[col].cellFormat == 'function') {
             cell_value = specification[col].cellFormat(cell_value);
