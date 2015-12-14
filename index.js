@@ -53,9 +53,16 @@ module.exports = {
           }
 
           if(specification[col].cellStyle) {
-            cell_value = {
-              value: cell_value,
-              style: specification[col].cellStyle
+            if (typeof specification[col].cellStyle == 'function') {
+              cell_value = {
+                value: cell_value,
+                style: specification[col].cellStyle(cell_value, record)
+              };
+            } else {
+              cell_value = {
+                value: cell_value,
+                style: specification[col].cellStyle
+              };
             }
           }
           row.push(cell_value); // Push new cell to the row
@@ -74,4 +81,4 @@ module.exports = {
     return excel.build(sheets);
 
   }
-}
+};
